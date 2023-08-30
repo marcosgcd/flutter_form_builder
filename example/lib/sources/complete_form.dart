@@ -19,6 +19,9 @@ class _CompleteFormState extends State<CompleteForm> {
   final _formKey = GlobalKey<FormBuilderState>();
   bool _ageHasError = false;
   bool _genderHasError = false;
+  final focusNode = FocusNode();
+
+  bool _show = true;
 
   var genderOptions = ['Male', 'Female', 'Other'];
 
@@ -47,9 +50,51 @@ class _CompleteFormState extends State<CompleteForm> {
             skipDisabled: true,
             child: Column(
               children: <Widget>[
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      _show = !_show;
+                    });
+                  },
+                  child: const Text("Press to show/hide age3"),
+                ),
+                if (_show)
+                  FormBuilderTextField(
+                    autovalidateMode: AutovalidateMode.always,
+                    name: 'age2',
+                    decoration: const InputDecoration(
+                      labelText: 'Age2',
+                    ),
+                    onChanged: (val) {
+                      setState(() {
+                        _ageHasError = !(_formKey.currentState?.fields['age']
+                                ?.validate() ??
+                            false);
+                      });
+                    },
+                    keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.next,
+                  ),
+                FormBuilderTextField(
+                  autovalidateMode: AutovalidateMode.always,
+                  name: 'age3',
+                  decoration: const InputDecoration(
+                    labelText: 'Age3',
+                  ),
+                  onChanged: (val) {
+                    setState(() {
+                      _ageHasError =
+                          !(_formKey.currentState?.fields['age']?.validate() ??
+                              false);
+                    });
+                  },
+                  keyboardType: TextInputType.number,
+                  textInputAction: TextInputAction.next,
+                ),
                 const SizedBox(height: 15),
                 FormBuilderDateTimePicker(
                   name: 'date',
+
                   initialEntryMode: DatePickerEntryMode.calendar,
                   initialValue: DateTime.now(),
                   inputType: InputType.both,
