@@ -59,9 +59,7 @@ class _CompleteFormState extends State<CompleteForm> {
                   child: const Text("Press to show/hide age3"),
                 ),
                 if (_show)
-                  FormBuilderTextField(
-                    autovalidateMode: AutovalidateMode.always,
-                    name: 'age2',
+                  TextField(
                     decoration: const InputDecoration(
                       labelText: 'Age2',
                     ),
@@ -75,9 +73,7 @@ class _CompleteFormState extends State<CompleteForm> {
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.next,
                   ),
-                FormBuilderTextField(
-                  autovalidateMode: AutovalidateMode.always,
-                  name: 'age3',
+                TextField(
                   decoration: const InputDecoration(
                     labelText: 'Age3',
                   ),
